@@ -283,9 +283,10 @@ packages:
   usb_esc_printer_windows:
     dependency: "direct main"
     description:
-      path: ".."
-      relative: true
-    source: path
+      name: usb_esc_printer_windows
+      sha256: "96f29dcfa8506ab0f0c5e88b7650b571fb56476ce3c18b01d5af14bd9b1b9d1c"
+      url: "https://pub.dev"
+    source: hosted
     version: "0.0.1"
   vector_math:
     dependency: transitive

@@ -56,28 +56,8 @@ class _MyAppState extends State<MyApp> {
     final profile = await _profile;
     final generator = Generator(PaperSize.mm80, profile);
 
-    //LOGO
-    final ByteData data = await rootBundle.load('assets/images/logo.png');
-    final Uint8List b = data.buffer.asUint8List();
-    final image = decodeImage(b);
-
-    if (image != null) {
-      bytes += generator.image(image);
-    }
-    bytes += generator.text('Stitch it Corporate Office #3221');
-
-    bytes += generator.text('Stitch it Corporate Office #3221');
-
-    bytes += generator.text('3221 North Service Rd');
-
-    bytes += generator.text('Postal Code : L7N 3G2');
-
-    bytes += generator.text('Tel : 9053350922');
-
-    bytes += generator.feed(1);
-
     //GENERATE BARCODE
-    String invoiceNo = "32212300000128";
+    String invoiceNo = "322123000000";
     List<int> barData =
         invoiceNo.split('').map((String digit) => int.parse(digit)).toList();
 
@@ -90,7 +70,7 @@ class _MyAppState extends State<MyApp> {
     bytes += generator.feed(1);
 
     bytes += generator.text(
-      'INV #32212300000128',
+      'INV #322123000000',
       styles: const PosStyles(
         align: PosAlign.center,
         height: PosTextSize.size2,
@@ -113,20 +93,9 @@ class _MyAppState extends State<MyApp> {
 
     bytes += generator.feed(1);
 
-    //0 = left, center = 1 right = 2
-    bytes += [27, 97, 0];
-
-    bytes += generator.text(
-      'Lab, Spantik',
-      styles: const PosStyles(
-        height: PosTextSize.size2,
-        width: PosTextSize.size2,
-      ),
-    );
-
     bytes += generator.text('Walk in');
 
-    bytes += generator.text('Tel : 923472394224');
+    bytes += generator.text('Tel : 0000000000');
 
     bytes += generator.text('Date\\Time : Sun, 10 Sep 2023 06:24 PM');
 
@@ -184,7 +153,7 @@ class _MyAppState extends State<MyApp> {
     //GENERATE BARCODE
     bytes += generator.barcode(
       Barcode.itf(
-        "3221230000012800"
+        "32212300000000"
             .split('')
             .map((String digit) => int.parse(digit))
             .toList(),
@@ -193,7 +162,7 @@ class _MyAppState extends State<MyApp> {
       textPos: BarcodeText.none,
     );
 
-    bytes += generator.text("3221230000012800");
+    bytes += generator.text("32212300000000");
 
     bytes += generator.feed(1);
 
@@ -289,7 +258,7 @@ class _MyAppState extends State<MyApp> {
     //GENERATE BARCODE
     bytes += generator.barcode(
       Barcode.itf(
-        "3221230000012800"
+        "32212300000000"
             .split('')
             .map((String digit) => int.parse(digit))
             .toList(),
@@ -298,7 +267,7 @@ class _MyAppState extends State<MyApp> {
       textPos: BarcodeText.none,
     );
 
-    bytes += generator.text("3221230000012800");
+    bytes += generator.text("32212300000000");
 
     bytes += generator.feed(1);
 
