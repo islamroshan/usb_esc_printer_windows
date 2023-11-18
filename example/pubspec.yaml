@@ -2,7 +2,7 @@ name: usb_esc_printer_windows_example
 description: Demonstrates how to use the usb_esc_printer_windows plugin.
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+ 
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -31,14 +31,8 @@ dependencies:
   flutter:
     sdk: flutter
 
-  usb_esc_printer_windows:
-    # When depending on this package from a real application you should use:
-    #   usb_esc_printer_windows: ^x.y.z
-    # See https://dart.dev/tools/pub/dependencies#version-constraints
-    # The example app is bundled with the plugin so we use a path dependency on
-    # the parent directory to use the current plugin's version.
-    path: ../
-
+  usb_esc_printer_windows: 0.0.1
+ 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2

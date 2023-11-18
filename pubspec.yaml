@@ -1,7 +1,7 @@
 name: usb_esc_printer_windows
-description: A new Flutter FFI plugin project.
+description: Flutter FFI ESC/POS Printer Plugin For Windows Platform
 version: 0.0.1
-homepage:
+homepage: https://github.com/islamroshan/usb_esc_printer_windows.git
 
 environment:
   sdk: '>=3.1.5 <4.0.0'

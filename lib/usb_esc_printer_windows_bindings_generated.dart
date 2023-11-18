@@ -24,23 +24,23 @@ class UsbEscPrinterWindowsBindings {
           lookup)
       : _lookup = lookup;
 
-  int print_data(
+  int sendPrintReq(
     ffi.Pointer<ffi.Uint8> data,
     int length,
     ffi.Pointer<ffiP.Utf16> name,
   ) {
-    return _print_data(
+    return _sendPrintReq(
       data,
       length,
       name,
     );
   }
 
-  late final _print_dataPtr = _lookup<
+  late final _sendPrintReqPtr = _lookup<
       ffi.NativeFunction<
           ffi.Int Function(ffi.Pointer<ffi.Uint8>, ffi.Int,
-              ffi.Pointer<ffiP.Utf16>)>>('print_data');
-  late final _print_data = _print_dataPtr.asFunction<
+              ffi.Pointer<ffiP.Utf16>)>>('sendPrintReq');
+  late final _sendPrintReq = _sendPrintReqPtr.asFunction<
       int Function(ffi.Pointer<ffi.Uint8>, int, ffi.Pointer<ffiP.Utf16>)>();
 }
 

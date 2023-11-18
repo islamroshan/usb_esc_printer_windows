@@ -1,6 +1,6 @@
 # usb_esc_printer_windows
 
-A new Flutter FFI plugin project.
+Flutter FFI ESC/POS Printer Plugin For Windows Platform
 
 ## Getting Started
 
@@ -58,14 +58,7 @@ A plugin can have both FFI and method channels:
 ```
 
 The native build systems that are invoked by FFI (and method channel) plugins are:
-
-* For Android: Gradle, which invokes the Android NDK for native builds.
-  * See the documentation in android/build.gradle.
-* For iOS and MacOS: Xcode, via CocoaPods.
-  * See the documentation in ios/usb_esc_printer_windows.podspec.
-  * See the documentation in macos/usb_esc_printer_windows.podspec.
-* For Linux and Windows: CMake.
-  * See the documentation in linux/CMakeLists.txt.
+* For Windows: CMake.
   * See the documentation in windows/CMakeLists.txt.
 
 ## Binding to native code
