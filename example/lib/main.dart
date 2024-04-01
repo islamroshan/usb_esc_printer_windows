@@ -1,9 +1,8 @@
-import 'package:esc_pos_utils_plus/esc_pos_utils.dart';
+import 'package:esc_pos_utils_plus/esc_pos_utils_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:image/image.dart';
-import 'package:usb_esc_printer_windows/usb_esc_printer_windows.dart'
-    as usb_esc_printer_windows;
+import 'package:image/image.dart' as img;
+import 'package:usb_esc_printer_windows/usb_esc_printer_windows.dart' as usb_esc_printer_windows;
 
 void main() {
   runApp(const MyApp());
@@ -31,8 +30,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text(
-              'Fluter ESC/POS Printer Pakage For Windows Platform Only'),
+          title: const Text('Fluter ESC/POS Printer Pakage For Windows Platform Only'),
         ),
         body: SingleChildScrollView(
           child: Container(
@@ -51,15 +49,27 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
+  Future<Uint8List> loadImageFromAssets(String path) async {
+    final ByteData data = await rootBundle.load(path);
+    return data.buffer.asUint8List();
+  }
+
   printReq() async {
     List<int> bytes = [];
     final profile = await _profile;
     final generator = Generator(PaperSize.mm80, profile);
 
+    // LOGO
+    final Uint8List data = await loadImageFromAssets('assets/images/logo.png');
+
+    img.Image originalImage = img.decodeImage(data)!;
+
+    bytes += generator.imageRaster(originalImage, align: PosAlign.center);
+    bytes += generator.feed(1);
+
     //GENERATE BARCODE
     String invoiceNo = "322123000000";
-    List<int> barData =
-        invoiceNo.split('').map((String digit) => int.parse(digit)).toList();
+    List<int> barData = invoiceNo.split('').map((String digit) => int.parse(digit)).toList();
 
     bytes += generator.barcode(
       Barcode.itf(barData),
@@ -153,10 +163,7 @@ class _MyAppState extends State<MyApp> {
     //GENERATE BARCODE
     bytes += generator.barcode(
       Barcode.itf(
-        "32212300000000"
-            .split('')
-            .map((String digit) => int.parse(digit))
-            .toList(),
+        "32212300000000".split('').map((String digit) => int.parse(digit)).toList(),
       ),
       height: 50,
       textPos: BarcodeText.none,
@@ -258,10 +265,7 @@ class _MyAppState extends State<MyApp> {
     //GENERATE BARCODE
     bytes += generator.barcode(
       Barcode.itf(
-        "32212300000000"
-            .split('')
-            .map((String digit) => int.parse(digit))
-            .toList(),
+        "32212300000000".split('').map((String digit) => int.parse(digit)).toList(),
       ),
       height: 50,
       textPos: BarcodeText.none,
@@ -425,15 +429,13 @@ class _MyAppState extends State<MyApp> {
     bytes += generator.feed(1);
     bytes += generator.cut();
 
-    final res =
-        await usb_esc_printer_windows.sendPrintRequest(bytes, _printerName);
+    final res = await usb_esc_printer_windows.sendPrintRequest(bytes, _printerName);
     String msg = "";
 
     if (res == "success") {
       msg = "Printed Successfully";
     } else {
-      msg =
-          "Failed to generate a print please make sure to use the correct printer name";
+      msg = "Failed to generate a print please make sure to use the correct printer name";
     }
 
     print(msg);
